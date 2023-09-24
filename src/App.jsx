@@ -1,7 +1,11 @@
 
 function App() {
   return (
-    <div>{import.meta.env.VITE_NAME}</div>
+    // <div className="content">{import.meta.env.VITE_NAME}
+    <div className="content">
+      <span className="goldenTitle">Barbie<br />Party</span>
+    
+    </div>
   )
 }
 
