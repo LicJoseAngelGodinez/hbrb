@@ -1,7 +1,28 @@
+// import { useRef } from 'react';
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
+// import emailjs from '@emailjs/browser';
+
 
 function App() {
+  
+  const sendmail = () => {
+    // let templateParams = {
+    //   name: '',
+    //   kenInvited: ''
+    // };
+
+    // emailjs.send(
+    //   import.meta.env.VITE_PROJECT,
+    //   import.meta.env.VITE_TEMPLATE,
+    //   templateParams,
+    //   import.meta.env.VITE_PKEY)
+    // .then(function(response) {
+    //    // SUCCESS
+    // }, function(error) {
+    //    // FAILED
+    // });
+  }
 
 
   return (
@@ -17,8 +38,8 @@ function App() {
           dividerStyle={{ color: 'white', height: 1 }}
           separatorStyle={{ color: `#${import.meta.env.VITE_PINK_COLOR}`, size: '.1em' }}
           duration={0.5}
-          
         />
+        <button onClick={sendmail}> send </button>
 
       </span>
     
