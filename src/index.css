@@ -1,13 +1,24 @@
 @font-face {
+  font-family: "BarbFont";
+  src: url("./assets/fonts/Bartex.ttf");
+}
+
+@font-face {
   font-family: "DelaFont";
   src: url("./assets/fonts/Dela.ttf");
+}
+
+@font-face {
+  font-family: "LilitaFont";
+  src: url("./assets/fonts/lilita.ttf");
 }
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'BarbFont';
 }
 
 body {
@@ -33,12 +44,44 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 60px;
   -webkit-text-stroke: .4px black;
   background-color: rgba(255, 255, 255, 0.65);
   padding: 2em;
   gap: 20px;
   justify-content: center;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.titleContainer img {
+  max-height: 75px;
+}
+
+.titleContainer p {
+  font-family: 'BarbFont';
+  background: -webkit-linear-gradient(#ae8625, #f7ef8a, #d2ac47, #edc967);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.salute {
+  font-size: 4em;
+}
+
+.mainMessage {
+  font-size: 3em;
+}
+
+.pink {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #e0218a;
 }
 
 .goldenTitle {
@@ -54,7 +97,7 @@ body {
 
  /* buttonClasses */
 
- button {
+ button, .btnLocation {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,11 +111,19 @@ body {
   font-size: 1.15em;
   font-weight: 900;
   color: rgb(134, 124, 124);
-  font-family: monospace;
+  /* font-family: monospace; */
+  font-family: 'BarbFont';
   transition: transform 400ms cubic-bezier(.68,-0.55,.27,2.5), 
   border-color 400ms ease-in-out,
   background-color 400ms ease-in-out;
   word-spacing: -2px;
+}
+
+.btnLocation {
+  font-family: monospace;
+  font-style: normal;
+  text-decoration: none;
+  text-align: center;
 }
 
 @keyframes movingBorders {
@@ -167,8 +218,12 @@ button:hover .filled {
  .formContainer label, 
  .formContainer .switch-holder, 
  .formContainer input {
-  display: none;
- }
+   display: none;
+  }
+  
+  .formContainer label {
+    font-family: 'LilitaFont', cursive;
+  }
 
  .formContainer.open button,
  .formContainer.open label,
@@ -186,6 +241,8 @@ button:hover .filled {
   padding: .8em;
   border-radius: 8px;
   border: 0px;
+  width: 280px;
+  font-family: 'Roboto', monospace;
  }
 
  /* formContainer */
@@ -196,18 +253,27 @@ button:hover .filled {
  .switch-holder {
   display: flex;
   border-radius: 10px;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  padding-top: 10px;
 }
 
 .switch-label {
-  padding: 0 20px 0 10px
+  padding: 0 20px 0 10px;
+}
+
+.switch-label span {
+  font-family: 'LilitaFont', cursive;
 }
 
 .switch-label i {
   margin-right: 5px;
+}
+
+.switch-toggle label {
+  font-family: 'Roboto', sans-serif;
 }
 
 .switch-toggle {
@@ -236,7 +302,7 @@ button:hover .filled {
 
 .switch-toggle input[type="checkbox"]+label::before {
   position: absolute;
-  content: 'No';
+  content: '0';
   font-size: 13px;
   color: black;
   text-align: center;
@@ -254,7 +320,7 @@ button:hover .filled {
 
 .switch-toggle input[type="checkbox"]:checked+label::before {
   left: 50%;
-  content: 'Si';
+  content: '01';
   color: black;
   background-color: cyan;
   box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
@@ -272,7 +338,7 @@ button:hover .filled {
   color: black;
   margin: 0 15px;
   padding: 8px;
-  font-size: 14px;
+  font-size: 1em;
   display: none;
  }
 
@@ -354,6 +420,51 @@ button:hover .filled {
 }
 
 /* confirmationCard */
+
+/* dateTitle */
+
+.dateTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #e0218a;
+}
+
+.dateLeft, .dateRight {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: center;
+  width: 115px;
+}
+
+.dateLeft span, .dateRight span {
+  font-family: 'BarbFont' !important;
+}
+
+.dateRight span:first-child {
+  font-size: 3.3em;
+}
+
+.dateLeft span:first-child {
+  font-size: 2em;
+}
+
+.dateLeft {
+  border-right: 2px #e0218a solid;
+  padding-right: 10px;
+}
+
+.dateRight {
+  padding-left: 10px;
+}
+
+.dateTitle span {
+  font-size: 1.8em;
+}
+
+/* dateTitle */
 
 @media only screen and (max-width: 360px)  {
   .goldenTitle {
