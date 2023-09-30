@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 import { useWindowDimensions } from './utils/utils';
-import brbLogo from './assets/comeon.png';
+import brbSiluette from './assets/siluette.svg';
 import emailjs from '@emailjs/browser';
 
 
@@ -55,6 +55,7 @@ function App() {
       registerButton.current.style.display = 'none';
       setLoaderClass('loader show');
       setButtonClicked(!buttonClicked);
+
       emailjs.send(
         import.meta.env.VITE_PROJECT,
         import.meta.env.VITE_TEMPLATE,
@@ -70,7 +71,6 @@ function App() {
           setConfirmationCardClass('confirmationCard show');
       }, function(error) {
          // FAILED
-        //  debugger;
           setLoaderClass('loader');
           setConfirmationCardClass('confirmationCard show');
           confirmationCard.current.innerText = `Algo ha ido mal, toma captura de pantalla y envía a la cumpleañera lo siguiente: ---- status ${error.status} - ${error.text}`;
@@ -83,12 +83,27 @@ function App() {
     <div className="content">
       <div className="banner">
 
-        <img className='brbImg' src={brbLogo} alt="opps no image" />
+        <div className='titleContainer'>
+          <p className='salute'>Hi {import.meta.env.VITE_BRB}</p>
+          <img className='brbImg' src={brbSiluette} alt="opps no image" />
+          <p className='mainMessage'>Let&apos;s party</p>
+          <p className='mainMessage'>in <span className='pink'>Pink</span></p>
+        </div>
+
+        <div className='dateTitle'>
+          <div className='dateLeft'>
+            <span>{import.meta.env.VITE_HOUR}</span>
+          </div>
+          <div className="dateRight">
+            <span>{import.meta.env.VITE_DAY}</span>
+            <span>{import.meta.env.VITE_MONTH}</span>
+          </div>
+        </div>
 
         <FlipClockCountdown
           to={import.meta.env.VITE_DATE}
           labels={['Días', 'Horas', 'Minutos', 'Segundos']}
-          labelStyle={{ fontSize: isSmallDevice ? '9px' : '13px', fontWeight: 500, textTransform: 'uppercase', color: `#${import.meta.env.VITE_PINK_COLOR}` }}
+          labelStyle={{ fontSize: isSmallDevice ? '9px' : '13px', fontWeight: 500, textTransform: 'uppercase', color: `#${import.meta.env.VITE_PINK_COLOR}`, fontFamily: 'Roboto' }}
           digitBlockStyle={{ width: '1.2em', height: isSmallDevice ? '1.6em' : '1.5em', fontSize: isSmallDevice ? '1.3em' : '2em', color: `#${import.meta.env.VITE_PINK_COLOR}`, background: '#f59e9e' }}
           dividerStyle={{ color: 'white', height: 1 }}
           separatorStyle={{ color: `#${import.meta.env.VITE_PINK_COLOR}`, size: isSmallDevice ? '3px' : '6px' }}
@@ -109,6 +124,9 @@ function App() {
           <p className='answers'>{guestName}</p>
           {guestMail && <><p>Correo</p><p className='answers'>{guestMail}</p></>}
           <p>Llevas a tu ken</p><p className='answers'>{`${guestPlusOne ? 'Si': 'No'}`}</p>
+          <a className='btnLocation' href={import.meta.env.VITE_LOCATION} target="_blank" rel="noreferrer noopener">
+            Ubicación de la fiesta
+          </a>
         </div>
 
         <div className={buttonClass}>
@@ -122,7 +140,7 @@ function App() {
           
           <div className="switch-holder">
             <div className="switch-label">
-                <span>¿Traes a tu Ken?</span>
+                <span>Acompañante</span>
             </div>
             <div className="switch-toggle">
                 <input ref={plusOneInput} type="checkbox" onChange={(e) => setGuestPlusOne(e.target.checked)} id="plusOne" />
