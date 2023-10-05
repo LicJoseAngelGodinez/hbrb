@@ -9,6 +9,7 @@ import emailjs from '@emailjs/browser';
 function App() {
 
   const winSize = useWindowDimensions();
+  const [registerFlag, setRegisterFlag] = useState({});
   const [isSmallDevice, setIsSmallDevice] = useState(winSize.width <=320);
   const [buttonClass, setButtonClass] = useState('formContainer');
   const [alertClass, setAlertClass] = useState('alert');
@@ -17,12 +18,35 @@ function App() {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [guestName, setGuestName] = useState('');
   const [guestMail, setGuestMail] = useState('');
+  const [registerText, setRegisterText] = useState('Registro Exitoso');
   const [guestPlusOne, setGuestPlusOne] = useState(false);
+  const [showConfetti, setShowConfetti] = useState('confetti');
   const confirmationCard = useRef(null);
   const registerButton = useRef(null);
   const nameInput = useRef(null);
   const mailInput = useRef(null);
   const plusOneInput = useRef(null);
+
+  useEffect(() => {
+    const registerFlagStorage = JSON.parse(localStorage.getItem('registerFlag'));
+    if ( registerFlagStorage ) {
+      setRegisterFlag(registerFlagStorage);
+      console.log(registerFlag);
+
+      const { name, mail, plusOne } = registerFlag;
+
+      setRegisterText('Datos Registrados');
+      setGuestName(name);
+      setGuestMail(mail);
+      setGuestPlusOne(plusOne);
+      registerButton.current.style.display = 'none';
+      setShowConfetti('confetti show');
+      setConfirmationCardClass('confirmationCard show');
+
+    } else {
+      setShowConfetti('confetti');
+    }
+  }, []);
 
   useEffect(() => {
     const { width } = winSize;
@@ -41,6 +65,7 @@ function App() {
       }, 400);
     } else {
       setButtonClass('formContainer');
+      setAlertClass('alert');
     }
   }, [buttonClicked]);
 
@@ -67,7 +92,13 @@ function App() {
         import.meta.env.VITE_PKEY)
       .then(function() {
          // SUCCESS
+          localStorage.setItem('registerFlag', JSON.stringify({
+            name: guestName,
+            mail: guestMail,
+            plusOne: guestPlusOne ? '01' : '0',
+          }));
           setLoaderClass('loader');
+          setShowConfetti('confetti show');
           setConfirmationCardClass('confirmationCard show');
       }, function(error) {
          // FAILED
@@ -81,6 +112,29 @@ function App() {
 
   return (
     <div className="content">
+
+      <div className={showConfetti}>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+      </div>
+
       <div className="banner">
 
         <div className='titleContainer'>
@@ -119,11 +173,11 @@ function App() {
         <div className={loaderClass}></div>
 
         <div ref={confirmationCard} className={confirmationCardClass}>
-          <h1>Registro exitoso</h1>
+          <h1>{registerText}</h1>
           <p>Nombre</p>
           <p className='answers'>{guestName}</p>
           {guestMail && <><p>Correo</p><p className='answers'>{guestMail}</p></>}
-          <p>Llevas a tu ken</p><p className='answers'>{`${guestPlusOne ? 'Si': 'No'}`}</p>
+          <p>Invitado</p><p className='answers'>{`${guestPlusOne ? 'Si': 'No'}`}</p>
           <a className='btnLocation' href={import.meta.env.VITE_LOCATION} target="_blank" rel="noreferrer noopener">
             Ubicación de la fiesta
           </a>
