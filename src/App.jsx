@@ -32,7 +32,6 @@ function App() {
     const registerFlagStorage = JSON.parse(localStorage.getItem('registerFlag'));
     if ( registerFlagStorage ) {
       setRegisterFlag(registerFlagStorage);
-      console.log(registerFlag);
 
       const { name, mail, plusOne } = registerFlag;
 
@@ -57,7 +56,6 @@ function App() {
   }, [winSize]);
 
   useEffect(() => {
-    console.log({buttonClicked});
     if ( buttonClicked ) {
       setRegisterButtonClass('hide');
       setFormContainerClass('formContainer open');
