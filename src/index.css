@@ -120,6 +120,10 @@ body {
   word-spacing: -2px;
 }
 
+.hide {
+  display: none;
+}
+
 .btnLocation {
   font-family: monospace;
   font-style: normal;
